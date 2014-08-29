@@ -3,14 +3,14 @@
 This script finds the 'hidden trips' in the trip data. 
 It looks for bike ids that leave from a station that doesn't
 match it's previous destination station. We find the length
-of this hidden trip by calculating the lower bound on the 
+of this hidden trip by calculating the lower bound on the time
 that it could have left it's previous station, i.e. the time
 it arrived from its last trip, and the upper bound, the time 
 it leaves its new station. The difference between these two
 times is the length of the trip.
 
 Author: Chase Duncan
-
+Contact: cddunca2@illinois.edu
 """
 
 import csv
@@ -22,9 +22,13 @@ from datetime import datetime
 """
 CONSTANTS
 """
+#change this variable to map to input file
 DATA_DIR =  "/Users/chaseduncan/Desktop/capital/data/capital_trip_data/master_trip_list_clean.csv"
+#change this variable to map to output file
+OUTPUT = "/Users/chaseduncan/Desktop/capital/data/capital_trip_data/hidden_trips.csv"
 DT_FMT = "%Y-%m-%d %H:%M:%S"
 NUM_TRIPS = 6402344 
+END_OF_TIME = "2014-04-01 00:06:00"
 """
 DATA STRUCTURES
 """
@@ -46,22 +50,23 @@ trips_header = trips.next()
 
 #dictionary for mapping names to ids
 names_to_ids = defaultdict()
-
-#Duration,Start date,End date,Start station,End station,Bike,Member Type
+#we add the null station so that we have a place for trips
+#to be born at the beginning of the data set and a place
+#for them to go to die at the end. 
+names_to_ids['null station'] = '00000'
 
 """
 WORK
 """
-#iterate over trips in the master list. do as follows:
-#	1. 
-#	2.
-#	3.
 process_num = 1
 logMsg("Processing trip file.")
 for [start_time, end_time, start_station, start_sid, end_station, end_sid,  bike_id] in trips:
+	#populate dictionaries so that we have a bijection between station names and station ids
 	names_to_ids[start_station] = start_sid
 	names_to_ids[end_station] = end_sid
 
+	#this variable is used for outputting updates about where we are at in the data as it 
+	#is being processed. 
 	process_num += 1
 	if(process_num % 10000 == 0):
 		logMsg("Still working. Processing trip " + str(process_num) + " of " + str(NUM_TRIPS) + ".")	
@@ -90,11 +95,11 @@ for [start_time, end_time, start_station, start_sid, end_station, end_sid,  bike
 		lower_date_id = str(t_1.year) + str(t_1.month)
 		upper_date_id = str(t_1.year) + str(t_2.month)
 
-		entry = (curr_station, str(names_to_ids[curr_station]), start_station, str(names_to_ids[start_station]), bike_id, last_time_seen, lower_bound_numeric,lower_date_id, end_time, upper_bound_numeric, upper_date_id, delta_t)	
+		entry = (curr_station, str(names_to_ids[curr_station]), start_station, str(names_to_ids[start_station]), bike_id, last_time_seen, lower_bound_numeric,lower_date_id, start_time, upper_bound_numeric, upper_date_id, delta_t)	
 		hidden_trips.append(entry)
 
 #write the hidden trips out to a csv file
-output = csv.writer(open("/Users/chaseduncan/Desktop/capital/data/capital_trip_data/hidden_trips.csv", "w"))
+output = csv.writer(open(OUTPUT, "w"))
 output_header = ["from_station", "from_sid", "to_station", "to_sid", "bike_id", "lower_bound", "lower_bound_numeric","lower_date_id", "upper_bound", "upper_bound_numeric", "upper_date_id", "delta_t"]
 output.writerow(output_header)
 

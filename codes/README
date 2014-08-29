@@ -1,0 +1,14 @@
+The files generate_relative_occupancies.py, missing_stations.py, 
+parse_raw_data.py, parse_station_caps.py, and  remove_duplicate_trips.py
+are all used to preprocess the raw trip data from Capital Bikeshare.
+
+Most of it is hardcoded for that particular dataset, namely the trip
+data from Q4 2010 to Q1 2014. Additional data from Capital or diff-
+erent data from another company will require augmentation. 
+
+hidden_broken_set_difference.py should be almost totally irrelevant 
+for anyone using this codebase. It was written to help track down
+a long forgotten bug. It is being left for the sake of posterity.
+
+
+
