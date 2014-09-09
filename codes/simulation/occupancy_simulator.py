@@ -157,7 +157,7 @@ class OccupancySimulator:
 			key = (bike_id, start_time)
 			self.broke_bikes[key] = (prob_broken, out_trips, start_time, end_time, start_station, start_sid, end_station, end_sid)
 
-	#runs the simulation. see README for more details.	
+	#runs the simulation. 
 	def run_simulation(self):
 		#variables for maintaining our position in each list
 		h_in_pos = 0
