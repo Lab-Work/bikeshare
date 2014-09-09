@@ -3,7 +3,7 @@ Script to merge all of the Capitol Bikeshare trip data csv files
 into one big csv file
 
 author: Chase Duncan
-
+contact: cddunca2@illinois.edu
 """
 
 import csv
@@ -12,7 +12,7 @@ from datetime import datetime
 from tools import *
 
 #constants
-DIR_PATH = "/Users/chaseduncan/Desktop/capitol/data/capitol_trip_data"
+DIR_PATH = "/Users/chaseduncan/Desktop/capital/data/capital_trip_data"
 DT_FMT = "%m/%d/%Y %H:%M"
 TEST_PASS = False
 

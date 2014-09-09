@@ -6,6 +6,7 @@ relative capacity beginning at zero and associates it
 with a UTC timestamp so it can be easily graphed in R.
 
 Author: Chase Duncan
+Contact: cddunca2@illinois.edu
 """
 
 import csv

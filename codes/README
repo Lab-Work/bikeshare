@@ -1,3 +1,12 @@
+NOTE: All of these scripts require tools.py from the divvy_project.
+If it is not available to you, please contact Brian Donovan.
+
+************************************************************
+*
+*DATA CLEANING
+*
+************************************************************
+
 The files generate_relative_occupancies.py, missing_stations.py, 
 parse_raw_data.py, parse_station_caps.py, and  remove_duplicate_trips.py
 are all used to preprocess the raw trip data from Capital Bikeshare.
@@ -10,5 +19,69 @@ hidden_broken_set_difference.py should be almost totally irrelevant
 for anyone using this codebase. It was written to help track down
 a long forgotten bug. It is being left for the sake of posterity.
 
+The workflow for data parsing goes as follows. The first program to 
+run is parse_raw_data.py. You will need all of 
+the trip data from Capital Bikeshare in one folder. Change the DIR_PATH
+variable to the path of that directory then run the script.
 
+The output from this program will be a master_trip_list.csv in the
+same folder as the data.
 
+Next run the script remove_duplicate_trips.py. This will output
+master_trip_list_clean.csv in the same folder. This is the base file
+for everything else we do.
+
+parse_station_caps.py can be independently run on the stations xml
+file that can be retrieved from Capital. However, it might be better
+(easier) to use the information from the scraper that is being
+run by the group.
+
+After we have the stations_info.csv output from parse_station_caps.py
+we can run missing_stations.py. That output is needed for the sim.
+
+Finally, we run extract_hidden_trips.py and broken_bikes.py to get our
+hidden trip list and broken_bike probabilities that are needed for the
+simulation.
+
+************************************************************
+*
+*SIMULATION
+*
+************************************************************
+
+Yay! The fun part. 
+
+The best reference for how to do this part is the main.py in the simulation
+folder.
+
+First, we create a simulator object. The constructor takes on parameter, a
+boolean, which tells the simulation whether or not to remove broken bikes.
+The process of removing broken bikes converts visits where the 
+probability of the bike being broken is high into hidden trips. Thus, the
+SIMULATION WILL NEVER GO OVER CAPACITY WHEN THIS FLAG IS TRUE. 
+
+The general process is to run the sim once to remove broken bikes then use
+extract_hidden_trips_ex.py in the preprocessing scripts to append the new
+hidden trips to the old. After that we run the simulation again without 
+removal of broken bikes and hope to see no instances of stations going over 
+capacity.
+
+But, we're getting ahead of ourselves. After making the simulator object 
+we need to create our event lists. This is done with the functions 
+regular_trips_to_events() and hidden_trips_to_events() which take in the
+trip file and the hidden trip file, respectively, as parameters.
+
+Then we need to generate the broken bike dictionaries which is done by
+running the function generate_broke_bike_dict.
+
+Finally the simulation is actually run with run_simulation.
+
+If the goal of the simulation was to identify additional hidden trips
+then you will want to retrieve the data in member list to_hidden. You 
+may consult main.py as a reference for how to do this.
+
+As noted, if you are removing bikes, you must run extract_hidden_trips_ex.py
+in between runs and make sure that on the second pass you are feeding in 
+the correct hidden trips file.
+
+FIN

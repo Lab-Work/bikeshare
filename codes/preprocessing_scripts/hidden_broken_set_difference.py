@@ -2,6 +2,8 @@
 This file was created as a part of the debugging
 process. I don't remember what purpose it served.
 
+Author: Chase Duncan
+Contact: cddunca2@illinois.edu
 """
 import csv
 from collections import defaultdict

@@ -1,0 +1,68 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+FILE: extract_hidden_trips.py
+
+INPUT: This file takes in a csv of bike-share trip data.
+Although the names of the columns in the file do not ma
+tter, the content of the data does, obviously. The file 
+must include (in this order): 
+
+start time of a trip, end time of a trip, the name of th
+e station the trip started from, the id(i.e. alpha-numer
+ic code) of the station that the trip started at, the en
+d station of the trip, the end station's id, and, finall
+y, the alpha-numeric id of the bike.
+
+The path to this file should be provided by way of the c
+onstant variable 'DATA_DIR'.
+
+OUTPUT: This program outputs a 'hidden trip' file to the
+path that is given by the constant variable OUTPUT.
+
+Please see line 103 for output format of the file.
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+FILE: parse_raw_data.py
+
+INPUT: Capital Bikeshare data from 4th-quarter 2010 to 1st
+-quarter 2014. 
+
+Output: A unified file of capital trip data.
+
+NOTE: This code is hardcoded to handle these specifc files.
+It will need to be augmented to handle more, less, or diff
+erent data. It's probably most useful as a reference and w
+ell documented within the code itself. 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+FILE: generate_relative_occupancies.py
+
+INPUT: Fully formatted trip data.
+
+OUTPUT: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

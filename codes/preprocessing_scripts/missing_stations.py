@@ -1,6 +1,7 @@
 """
-Search for stations that are in one
-dataset but not the other.
+Search for stations that are in 
+the trip data but are not in the 
+station capacity data.
 
 Author: Chase Duncan
 """
@@ -126,23 +127,4 @@ station_list.sort(key = lambda x: x[-1], reverse = True)
 
 for entry in station_list:
 	stations_out.writerow(entry)
-
-"""
-outfile.write("\n Stations in symmetric difference.\n")
-count = 1
-for sid in s_diff:
-	if(len(sid) != 0):
-		outfile.write(str(count) + ". " +sid + "\n")
-		count += 1
-
-outfile.write("\nThere were " + str(warehouse_start)+ " trips that left the 1714 warehouse and " + str(warehouse_end)+ " trips that ended there.\n")
-outfile.write("\nConnecticut and Nebraska first seen on " + con_neb +". \n")
-outfile.write("\nConnecticut and Tilde first seen on " + con_til + ". \n")
-logMsg("Done.")
-"""
-
-
-
-
-
 

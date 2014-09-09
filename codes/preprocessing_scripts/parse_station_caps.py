@@ -8,6 +8,7 @@ station_name, terminal_name, install_date,
 latitude, longitude, capacity
 
 Author: Chase Duncan
+Contact: cddunca2@illinois.edu
 """
 
 import csv

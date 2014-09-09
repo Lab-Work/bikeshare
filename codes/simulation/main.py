@@ -1,4 +1,12 @@
+"""
+This file was created to run the simulation.
+It will probably serve well as a template
+but one will want to write their own based
+on the future needs of the project.
 
+Author: Chase Duncan
+Contact: cddunca2@illinois.edu
+"""
 
 import csv
 from occupancy_simulator import *

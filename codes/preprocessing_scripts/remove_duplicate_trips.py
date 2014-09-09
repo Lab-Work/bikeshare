@@ -3,6 +3,7 @@ Removes the duplicate trips from the master_trip_list.csv.
 From whence did they come? We do not know.
 
 Author: Chase Duncan
+Contact: cddunca2@illinois.edu
 """
 import csv
 from tools import *
@@ -25,6 +26,7 @@ dup_file = csv.writer(open("/Users/chaseduncan/Desktop/capital/data/capital_trip
 
 #keeps track of how many duplicates we find. just for fun!
 dup_count = 0
+stub_count = 0
 prev_trip_all = None
 
 #used for outputting updates
@@ -44,7 +46,10 @@ for [duration,start_time,end_time,start_station,start_sid,end_station,end_sid,bi
 
 		dup_count += 1
 		continue
-
+	
+	elif(start_time == end_time and start_sid == end_sid):
+		stub_count += 1
+		continue
 	else:
 		entry = (start_time, end_time, start_station, start_sid, end_station, end_sid, bike_id)
 		output_list.append(entry)
@@ -58,6 +63,7 @@ for [duration,start_time,end_time,start_station,start_sid,end_station,end_sid,bi
 	prev_trip_all = [duration,start_time,end_time,start_station,start_sid,end_station,end_sid,bike_id,mem_type]
 
 logMsg(str(dup_count) + " duplicate trips found.")
+logMsg(str(stub_count) + " trips found that start and end at same station, at the same time.")
 logMsg("Writing output.")
 
 output_file = csv.writer(open("/Users/chaseduncan/Desktop/capital/data/capital_trip_data/master_trip_list_clean.csv", "w"))
